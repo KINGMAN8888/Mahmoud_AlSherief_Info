@@ -1,14 +1,34 @@
 export default function LoadingScreen() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center"
-         style={{ background: 'var(--bg-base)' }}>
-      <div className="w-10 h-10 rounded-full border-2 border-transparent"
-           style={{
-             borderTopColor: 'var(--gold)',
-             borderRightColor: 'var(--gold)',
-             animation: 'spinGold 0.8s linear infinite'
-           }} />
-      <p className="mt-4 text-sm" style={{ color: 'var(--text-muted)' }}>جاري التحميل...</p>
+    <div
+      style={{
+        minHeight: '100vh',
+        background: 'var(--bg-base)',
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
+        gap: 14,
+      }}
+    >
+      <div
+        className="spin-gold"
+        style={{
+          width: 36, height: 36, borderRadius: '50%',
+          border: '2px solid var(--border)',
+          borderTopColor: 'var(--gold)',
+          borderRightColor: 'var(--gold)',
+        }}
+      />
+      <p
+        style={{
+          fontFamily: 'var(--font-ui)',
+          fontSize: 9, fontWeight: 800,
+          letterSpacing: '0.25em', textTransform: 'uppercase',
+          color: 'var(--text-muted)',
+          margin: 0,
+        }}
+      >
+        LOADING
+      </p>
     </div>
   );
 }

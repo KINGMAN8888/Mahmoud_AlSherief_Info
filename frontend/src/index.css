@@ -1,41 +1,116 @@
 @import "tailwindcss";
 
+/* ══════════════════════════════════════════════════
+   DARK THEME — Deep space navy + warm gold
+══════════════════════════════════════════════════ */
 :root {
-  --gold: #d4af37;
-  --gold-hover: #e5c158;
-  --gold-dim: rgba(212, 175, 55, 0.15);
-  --bg-base: #0a0a0a;
-  --bg-card: #161616;
-  --bg-surface: #1e1e1e;
-  --border: #2a2a2a;
-  --text-primary: #f0f0f0;
-  --text-muted: #888888;
+  --bg-base:        #07090f;
+  --bg-card:        #0c0e1e;
+  --bg-card-alpha:  rgba(12, 14, 30, 0.90);
+  --bg-surface:     #12152a;
+  --bg-surface2:    #181b36;
+  --border:         #1f2340;
+  --border-gold:    rgba(201, 162, 39, 0.32);
+  --border-subtle:  rgba(255, 255, 255, 0.05);
+
+  --text-primary:   #f3f0e8;
+  --text-secondary: #9a9490;
+  --text-muted:     #585450;
+  --text-dim:       #2e2d38;
+
+  --gold:           #c9a227;
+  --gold-light:     #ddb840;
+  --gold-pale:      #f0d870;
+  --gold-dim:       rgba(201, 162, 39, 0.11);
+  --gold-glow:      rgba(201, 162, 39, 0.28);
+  --gold-aura:      rgba(201, 162, 39, 0.06);
+
+  /* Link type accent colors */
+  --ac-phone:   rgba(74,  222, 128, 0.12);
+  --ac-phone-c: #4ade80;
+  --ac-msg:     rgba(74,  222, 128, 0.12);
+  --ac-msg-c:   #4ade80;
+  --ac-email:   rgba(96,  165, 250, 0.12);
+  --ac-email-c: #60a5fa;
+  --ac-web:     rgba(201, 162, 39,  0.12);
+  --ac-web-c:   #c9a227;
+  --ac-map:     rgba(251, 146, 60,  0.12);
+  --ac-map-c:   #fb923c;
+  --ac-default: rgba(201, 162, 39,  0.12);
+  --ac-default-c: #c9a227;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-ui:      'Syne', system-ui, sans-serif;
+  --font-mono:    'IBM Plex Mono', 'Courier New', monospace;
+  --font-arabic:  'Tajawal', 'Syne', sans-serif;
 }
 
-* {
-  box-sizing: border-box;
+/* ══════════════════════════════════════════════════
+   LIGHT THEME — Warm ivory + amber gold
+══════════════════════════════════════════════════ */
+[data-theme="light"] {
+  --bg-base:        #f4f1eb;
+  --bg-card:        #ffffff;
+  --bg-card-alpha:  rgba(255, 255, 255, 0.90);
+  --bg-surface:     #ede9df;
+  --bg-surface2:    #e4dfd3;
+  --border:         #d8d2c5;
+  --border-gold:    rgba(160, 120, 0, 0.22);
+  --border-subtle:  rgba(0, 0, 0, 0.04);
+
+  --text-primary:   #1c1814;
+  --text-secondary: #5c5248;
+  --text-muted:     #9a9088;
+  --text-dim:       #cdc8be;
+
+  --gold:           #a07800;
+  --gold-light:     #c49400;
+  --gold-pale:      #d4a800;
+  --gold-dim:       rgba(160, 120, 0, 0.08);
+  --gold-glow:      rgba(160, 120, 0, 0.18);
+
+  --ac-phone:   rgba(22,  163, 74,  0.1);
+  --ac-phone-c: #15803d;
+  --ac-msg:     rgba(22,  163, 74,  0.1);
+  --ac-msg-c:   #15803d;
+  --ac-email:   rgba(37,  99,  235, 0.1);
+  --ac-email-c: #1d4ed8;
+  --ac-web:     rgba(160, 120, 0,   0.1);
+  --ac-web-c:   #a07800;
+  --ac-map:     rgba(234, 88,  12,  0.1);
+  --ac-map-c:   #c2410c;
+  --ac-default: rgba(160, 120, 0,   0.1);
+  --ac-default-c: #a07800;
 }
+
+/* ══════════════════════════════════════════════════
+   BASE RESET
+══════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
   background-color: var(--bg-base);
   color: var(--text-primary);
-  font-family: 'Tajawal', 'Inter', sans-serif;
+  font-family: var(--font-arabic);
   margin: 0;
   -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-::selection {
-  background: var(--gold);
-  color: #000;
-}
+::selection { background: var(--gold); color: #000; }
 
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
+/* ══════════════════════════════════════════════════
+   KEYFRAMES
+══════════════════════════════════════════════════ */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0);    }
 }
 
 @keyframes fadeIn {
@@ -47,30 +122,407 @@ body {
   to { transform: rotate(360deg); }
 }
 
-@keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position: 200% center; }
+@keyframes shimmerText {
+  0%   { background-position: -300% center; }
+  100% { background-position:  300% center; }
 }
 
+@keyframes heroReveal {
+  from { opacity: 0; transform: scale(1.04); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
+@keyframes pulseRing {
+  0%, 100% { box-shadow: 0 0 0 0 var(--gold-glow); }
+  50%       { box-shadow: 0 0 0 8px transparent;    }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ══════════════════════════════════════════════════
+   ANIMATION UTILITIES
+══════════════════════════════════════════════════ */
 .animate-fade-up {
-  animation: fadeUp 0.6s ease forwards;
+  animation: fadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.4s ease forwards;
+  animation: fadeIn 0.5s ease forwards;
 }
 
-.animate-delay-1 { animation-delay: 0.1s; opacity: 0; }
-.animate-delay-2 { animation-delay: 0.2s; opacity: 0; }
-.animate-delay-3 { animation-delay: 0.3s; opacity: 0; }
-.animate-delay-4 { animation-delay: 0.4s; opacity: 0; }
-.animate-delay-5 { animation-delay: 0.5s; opacity: 0; }
+.animate-hero {
+  animation: heroReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
 
+.animate-hud {
+  animation: slideDown 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Stagger delays */
+.d0 { animation-delay: 0.00s; opacity: 0; }
+.d1 { animation-delay: 0.10s; opacity: 0; }
+.d2 { animation-delay: 0.20s; opacity: 0; }
+.d3 { animation-delay: 0.30s; opacity: 0; }
+.d4 { animation-delay: 0.40s; opacity: 0; }
+.d5 { animation-delay: 0.50s; opacity: 0; }
+.d6 { animation-delay: 0.60s; opacity: 0; }
+.d7 { animation-delay: 0.70s; opacity: 0; }
+.d8 { animation-delay: 0.80s; opacity: 0; }
+
+/* ══════════════════════════════════════════════════
+   GOLD SHIMMER TEXT
+══════════════════════════════════════════════════ */
 .gold-shimmer {
-  background: linear-gradient(90deg, var(--gold) 0%, var(--gold-hover) 50%, var(--gold) 100%);
-  background-size: 200% auto;
-  animation: shimmer 3s linear infinite;
+  background: linear-gradient(
+    90deg,
+    var(--gold)       0%,
+    var(--gold-light) 35%,
+    var(--gold-pale)  50%,
+    var(--gold-light) 65%,
+    var(--gold)       100%
+  );
+  background-size: 300% auto;
+  animation: shimmerText 4s linear infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* ══════════════════════════════════════════════════
+   COORDINATE GRID (tech / map overlay effect)
+══════════════════════════════════════════════════ */
+.coord-grid {
+  background-image:
+    linear-gradient(rgba(201,162,39,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,162,39,0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+[data-theme="light"] .coord-grid {
+  background-image:
+    linear-gradient(rgba(160,120,0,0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(160,120,0,0.09) 1px, transparent 1px);
+}
+
+/* ══════════════════════════════════════════════════
+   THEME TRANSITION
+══════════════════════════════════════════════════ */
+.theme-transition,
+.theme-transition * {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease !important;
+}
+
+/* ══════════════════════════════════════════════════
+   NEUMORPHIC SYSTEM
+   Dark:  bg #181b28 — shadow pair #11131c / #1f2334
+   Light: bg #ece8de — shadow pair #c6c3bb / #ffffff
+══════════════════════════════════════════════════ */
+:root {
+  --neum-bg:       #141727;
+  --neum-bg-alpha: rgba(20, 23, 39, 0.94);
+  --neum-outer:        12px 12px 24px #0d1020, -12px -12px 24px #1b1e34;
+  --neum-outer-hover:  18px 18px 36px #090d1c, -18px -18px 36px #1f243e;
+  --neum-inset:   inset 6px 6px 12px #0d1020, inset -6px -6px 12px #1b1e34;
+  --neum-raised:       5px 5px 10px #0d1020, -5px -5px 10px #1b1e34;
+  --neum-pressed: inset 3px 3px 6px #0d1020, inset -3px -3px 6px #1b1e34;
+}
+
+[data-theme="light"] {
+  --neum-bg:       #ece8de;
+  --neum-bg-alpha: rgba(236, 232, 222, 0.93);
+  --neum-outer:  12px 12px 24px #c6c3bb, -12px -12px 24px #ffffff;
+  --neum-outer-hover: 18px 18px 36px #bab7b0, -18px -18px 36px #ffffff;
+  --neum-inset:  inset 6px 6px 12px #c6c3bb, inset -6px -6px 12px #ffffff;
+  --neum-raised: 5px 5px 10px #c6c3bb, -5px -5px 10px #ffffff;
+  --neum-pressed:inset 3px 3px 6px #c6c3bb, inset -3px -3px 6px #ffffff;
+}
+
+/* ══════════════════════════════════════════════════
+   NEUMORPHIC ANIMATED GRID
+══════════════════════════════════════════════════ */
+@keyframes gridMove {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(40px, 40px); }
+}
+
+@keyframes pulseDot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+  50%       { box-shadow: 0 0 0 5px rgba(34,197,94,0);  }
+}
+
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-3px); }
+}
+
+/* ══════════════════════════════════════════════════
+   PROFILE HERO CARD
+══════════════════════════════════════════════════ */
+.profile-hero-card {
+  position: relative;
+  background: var(--neum-bg);
+  box-shadow: var(--neum-outer);
+  border-radius: 28px;
+  transition: box-shadow 0.45s cubic-bezier(0.22,1,0.36,1), transform 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+
+.profile-hero-card:hover {
+  box-shadow: var(--neum-outer-hover);
+  transform: translateY(-6px) scale(1.012);
+}
+
+/* Avatar neumorphic frame */
+.neum-avatar-frame {
+  box-shadow: var(--neum-inset);
+  transition: box-shadow 0.5s ease, transform 0.5s ease;
+}
+
+.profile-hero-card:hover .neum-avatar-frame {
+  transform: scale(1.08);
+}
+
+/* Neumorphic raised button */
+.neum-btn {
+  box-shadow: var(--neum-raised);
+  transition: box-shadow 0.2s ease, transform 0.15s ease, background 0.2s ease;
+}
+
+.neum-btn:hover  { box-shadow: var(--neum-pressed); }
+.neum-btn:active { box-shadow: var(--neum-pressed); transform: scale(0.95); }
+
+/* Gold ring that appears on card hover */
+.card-hover-ring {
+  position: absolute; inset: 0;
+  border-radius: 28px;
+  border: 1px solid var(--border-gold);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+.profile-hero-card:hover .card-hover-ring { opacity: 1; }
+
+/* Avatar gold ring glow */
+.avatar-glow-ring {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  opacity: 0;
+  transition: opacity 0.45s ease, box-shadow 0.45s ease;
+}
+
+.profile-hero-card:hover .avatar-glow-ring {
+  opacity: 1;
+  box-shadow: 0 0 16px var(--gold-glow);
+}
+
+/* Name turns gold on hover */
+.profile-name {
+  transition: color 0.3s ease;
+}
+
+.profile-hero-card:hover .profile-name {
+  color: var(--gold) !important;
+}
+
+/* Info block lifts on hover */
+.profile-info-block {
+  transition: transform 0.3s ease;
+}
+
+.profile-hero-card:hover .profile-info-block {
+  transform: translateY(-3px);
+}
+
+/* Verified badge animates */
+.verified-badge {
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease;
+}
+
+.profile-hero-card:hover .verified-badge {
+  transform: rotate(12deg) scale(1.15);
+  box-shadow: 0 0 14px var(--gold-glow);
+}
+
+/* Tag scale on hover */
+.profile-tag {
+  transition: transform 0.25s ease;
+}
+
+.profile-hero-card:hover .profile-tag {
+  transform: scale(1.06);
+}
+
+/* ══════════════════════════════════════════════════
+   LOADING SPINNER
+══════════════════════════════════════════════════ */
+.spin-gold {
+  animation: spinGold 0.85s linear infinite;
+}
+
+/* ══════════════════════════════════════════════════
+   ISLAMIC GEOMETRIC BACKGROUND SYSTEM
+   8-pointed star (octagram) tiling — two scales
+   Large: 160×160  ·  Small: 80×80 offset 40px
+══════════════════════════════════════════════════ */
+
+/* Star path geometry (center 80,80  R=28  r=11.6):
+   Outer: 108,80 → 99.8,99.8 → 80,108 → 60.2,99.8
+          → 52,80 → 60.2,60.2 → 80,52 → 99.8,60.2
+   Inner octagon: the 8 inner points connected       */
+
+@keyframes islamicDrift {
+  0%   { background-position: 0 0, 40px 40px; }
+  100% { background-position: 160px 160px, 120px 120px; }
+}
+
+@keyframes auricGlow {
+  0%, 100% { opacity: 0.55; }
+  50%       { opacity: 1; }
+}
+
+@keyframes cardLevitate {
+  0%, 100% { transform: translateY(0px); }
+  33%       { transform: translateY(-5px); }
+  66%       { transform: translateY(-2px); }
+}
+
+@keyframes heroPan {
+  0%   { transform: scale(1.0); }
+  100% { transform: scale(1.07); }
+}
+
+@keyframes goldBeamSweep {
+  0%   { left: -80%; }
+  100% { left: 150%; }
+}
+
+@keyframes ornamentSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Page background (outer wrapper, visible on desktop) ── */
+.islamic-page-bg {
+  background-color: var(--bg-base);
+  background-image:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><path fill='none' stroke='%23c9a227' stroke-opacity='.14' stroke-width='.9' d='M108,80 L90.7,84.4 L99.8,99.8 L84.4,90.7 L80,108 L75.6,90.7 L60.2,99.8 L69.3,84.4 L52,80 L69.3,75.6 L60.2,60.2 L75.6,69.3 L80,52 L84.4,69.3 L99.8,60.2 L90.7,75.6 Z'/><path fill='none' stroke='%23c9a227' stroke-opacity='.07' stroke-width='.5' d='M90.7,84.4 L84.4,90.7 L75.6,90.7 L69.3,84.4 L69.3,75.6 L75.6,69.3 L84.4,69.3 L90.7,75.6 Z'/><path fill='none' stroke='%23c9a227' stroke-opacity='.04' stroke-width='.4' d='M108,80 L160,80 M52,80 L0,80 M80,52 L80,0 M80,108 L80,160 M99.8,99.8 L160,160 M60.2,99.8 L0,160 M60.2,60.2 L0,0 M99.8,60.2 L160,0'/></svg>"),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><path fill='none' stroke='%23c9a227' stroke-opacity='.08' stroke-width='.5' d='M56,40 L46.1,42.5 L51.3,51.3 L42.5,46.1 L40,56 L37.5,46.1 L28.7,51.3 L33.9,42.5 L24,40 L33.9,37.5 L28.7,28.7 L37.5,33.9 L40,24 L42.5,33.9 L51.3,28.7 L46.1,37.5 Z'/><path fill='none' stroke='%23c9a227' stroke-opacity='.04' stroke-width='.3' d='M46.1,42.5 L42.5,46.1 L37.5,46.1 L33.9,42.5 L33.9,37.5 L37.5,33.9 L42.5,33.9 L46.1,37.5 Z'/></svg>");
+  background-size: 160px 160px, 80px 80px;
+  background-position: 0 0, 40px 40px;
+  animation: islamicDrift 120s linear infinite;
+}
+
+[data-theme="light"] .islamic-page-bg {
+  background-color: #f0ece2;
+  background-image:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><path fill='none' stroke='%23a07800' stroke-opacity='.17' stroke-width='.9' d='M108,80 L90.7,84.4 L99.8,99.8 L84.4,90.7 L80,108 L75.6,90.7 L60.2,99.8 L69.3,84.4 L52,80 L69.3,75.6 L60.2,60.2 L75.6,69.3 L80,52 L84.4,69.3 L99.8,60.2 L90.7,75.6 Z'/><path fill='none' stroke='%23a07800' stroke-opacity='.09' stroke-width='.5' d='M90.7,84.4 L84.4,90.7 L75.6,90.7 L69.3,84.4 L69.3,75.6 L75.6,69.3 L84.4,69.3 L90.7,75.6 Z'/><path fill='none' stroke='%23a07800' stroke-opacity='.05' stroke-width='.4' d='M108,80 L160,80 M52,80 L0,80 M80,52 L80,0 M80,108 L80,160 M99.8,99.8 L160,160 M60.2,99.8 L0,160 M60.2,60.2 L0,0 M99.8,60.2 L160,0'/></svg>"),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><path fill='none' stroke='%23a07800' stroke-opacity='.11' stroke-width='.5' d='M56,40 L46.1,42.5 L51.3,51.3 L42.5,46.1 L40,56 L37.5,46.1 L28.7,51.3 L33.9,42.5 L24,40 L33.9,37.5 L28.7,28.7 L37.5,33.9 L40,24 L42.5,33.9 L51.3,28.7 L46.1,37.5 Z'/><path fill='none' stroke='%23a07800' stroke-opacity='.06' stroke-width='.3' d='M46.1,42.5 L42.5,46.1 L37.5,46.1 L33.9,42.5 L33.9,37.5 L37.5,33.9 L42.5,33.9 L46.1,37.5 Z'/></svg>");
+}
+
+/* ── Card background (inner card, primary mobile view) ── */
+.islamic-card-bg {
+  background-color: var(--neum-bg);
+  background-image:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><path fill='none' stroke='%23c9a227' stroke-opacity='.09' stroke-width='.8' d='M108,80 L90.7,84.4 L99.8,99.8 L84.4,90.7 L80,108 L75.6,90.7 L60.2,99.8 L69.3,84.4 L52,80 L69.3,75.6 L60.2,60.2 L75.6,69.3 L80,52 L84.4,69.3 L99.8,60.2 L90.7,75.6 Z'/><path fill='none' stroke='%23c9a227' stroke-opacity='.05' stroke-width='.45' d='M90.7,84.4 L84.4,90.7 L75.6,90.7 L69.3,84.4 L69.3,75.6 L75.6,69.3 L84.4,69.3 L90.7,75.6 Z'/></svg>"),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><path fill='none' stroke='%23c9a227' stroke-opacity='.05' stroke-width='.4' d='M56,40 L46.1,42.5 L51.3,51.3 L42.5,46.1 L40,56 L37.5,46.1 L28.7,51.3 L33.9,42.5 L24,40 L33.9,37.5 L28.7,28.7 L37.5,33.9 L40,24 L42.5,33.9 L51.3,28.7 L46.1,37.5 Z'/></svg>");
+  background-size: 160px 160px, 80px 80px;
+  background-position: 0 0, 40px 40px;
+  animation: islamicDrift 80s linear infinite;
+}
+
+[data-theme="light"] .islamic-card-bg {
+  background-color: var(--neum-bg);
+  background-image:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><path fill='none' stroke='%23a07800' stroke-opacity='.11' stroke-width='.8' d='M108,80 L90.7,84.4 L99.8,99.8 L84.4,90.7 L80,108 L75.6,90.7 L60.2,99.8 L69.3,84.4 L52,80 L69.3,75.6 L60.2,60.2 L75.6,69.3 L80,52 L84.4,69.3 L99.8,60.2 L90.7,75.6 Z'/><path fill='none' stroke='%23a07800' stroke-opacity='.06' stroke-width='.45' d='M90.7,84.4 L84.4,90.7 L75.6,90.7 L69.3,84.4 L69.3,75.6 L75.6,69.3 L84.4,69.3 L90.7,75.6 Z'/></svg>"),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><path fill='none' stroke='%23a07800' stroke-opacity='.07' stroke-width='.4' d='M56,40 L46.1,42.5 L51.3,51.3 L42.5,46.1 L40,56 L37.5,46.1 L28.7,51.3 L33.9,42.5 L24,40 L33.9,37.5 L28.7,28.7 L37.5,33.9 L40,24 L42.5,33.9 L51.3,28.7 L46.1,37.5 Z'/></svg>");
+}
+
+/* ══════════════════════════════════════════════════
+   CARD FLOAT + GOLD HALO
+══════════════════════════════════════════════════ */
+.card-levitate {
+  animation: cardLevitate 9s ease-in-out infinite;
+}
+
+.card-halo {
+  position: relative;
+}
+
+.card-halo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background: radial-gradient(ellipse 80% 55% at 50% 85%,
+    rgba(201, 162, 39, 0.16) 0%, transparent 70%);
+  animation: auricGlow 5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ══════════════════════════════════════════════════
+   HERO PAN (Ken Burns effect)
+══════════════════════════════════════════════════ */
+.hero-pan {
+  animation: heroPan 18s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+/* ══════════════════════════════════════════════════
+   GOLD BEAM SWEEP (link cards & profile card)
+══════════════════════════════════════════════════ */
+.link-beam {
+  position: relative;
+  overflow: hidden;
+}
+
+.link-beam::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: -80%;
+  width: 40%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 162, 39, 0.09) 50%,
+    transparent 100%
+  );
+  transform: skewX(-15deg);
+  pointer-events: none;
+  transition: left 0.65s ease;
+}
+
+.link-beam:hover::after {
+  left: 160%;
+}
+
+/* Profile card shimmer sweep on hover */
+.profile-hero-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 162, 39, 0.07) 50%,
+    transparent 100%
+  );
+  transform: skewX(-12deg);
+  pointer-events: none;
+  z-index: 5;
+  transition: left 0.9s ease;
+}
+
+.profile-hero-card:hover::after {
+  left: 150%;
 }
