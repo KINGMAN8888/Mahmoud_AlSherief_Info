@@ -44,22 +44,42 @@ async function shareProfile(data) {
 /* ── Translations ─────────────────────────────────────────── */
 const T = {
   ar: {
-    save: 'حفظ جهة الاتصال', share: 'مشاركة',
-    contact: 'معلومات الاتصال', connect: 'وسائل التواصل',
-    locations: 'الفروع والمواقع',
-    phone_label: 'الهاتف', email_label: 'البريد الإلكتروني', web_label: 'الموقع',
-    ceo_tag: 'رئيس تنفيذي', verified_tag: 'موثّق',
-    error: 'تعذّر تحميل البيانات', retry: 'إعادة المحاولة',
-    digital: 'البطاقة الرقمية',
+    save:          'حفظ جهة الاتصال',
+    share:         'مشاركة',
+    contact:       'معلومات التواصل',
+    connect:       'قنوات التواصل',
+    locations:     'الفروع والمواقع',
+    phone_label:   'الهاتف',
+    email_label:   'البريد الإلكتروني',
+    web_label:     'الموقع الإلكتروني',
+    ceo_tag:       'رئيس تنفيذي',
+    verified_tag:  'موثّق',
+    error:         'تعذّر تحميل البيانات',
+    retry:         'إعادة المحاولة',
+    digital:       'البطاقة الرقمية',
+    address_label: 'العنوان',
+    section_01:    'معلومات التواصل',
+    section_02:    'قنوات التواصل',
+    section_03:    'الفروع والمواقع',
   },
   en: {
-    save: 'Save Contact', share: 'Share',
-    contact: 'Contact Info', connect: 'Connect',
-    locations: 'Offices & Branches',
-    phone_label: 'Phone', email_label: 'Email', web_label: 'Website',
-    ceo_tag: 'CEO', verified_tag: 'Verified',
-    error: 'Failed to load profile', retry: 'Retry',
-    digital: 'Digital Business Card',
+    save:          'Save Contact',
+    share:         'Share',
+    contact:       'Contact Info',
+    connect:       'Connect',
+    locations:     'Offices & Branches',
+    phone_label:   'Phone',
+    email_label:   'Email',
+    web_label:     'Website',
+    ceo_tag:       'CEO',
+    verified_tag:  'Verified',
+    error:         'Failed to load profile',
+    retry:         'Retry',
+    digital:       'Digital Business Card',
+    address_label: 'Address',
+    section_01:    'Contact Info',
+    section_02:    'Connect',
+    section_03:    'Offices & Branches',
   },
 };
 
@@ -530,7 +550,7 @@ export default function PublicCard() {
 
         {/* ══ 01 — CONTACT INFO ══ */}
         <section className="animate-fade-up d5" style={{ padding: '0 22px', marginBottom: 28 }}>
-          <SectionHead num="01" label={t.contact} />
+          <SectionHead num="01" label={t.section_01} />
           <div style={{
             background: 'var(--neum-bg)',
             boxShadow: 'var(--neum-inset)',
@@ -548,7 +568,7 @@ export default function PublicCard() {
 
         {/* ══ 02 — CONNECT (links) ══ */}
         <section className="animate-fade-up d6" style={{ padding: '0 22px', marginBottom: 28 }}>
-          <SectionHead num="02" label={t.connect} />
+          <SectionHead num="02" label={t.section_02} />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
             {data.links.map((link, i) => (
               <LinkCard key={link.id} link={link} index={i} dir={dir} lang={lang} />
@@ -560,7 +580,7 @@ export default function PublicCard() {
 
         {/* ══ 03 — LOCATIONS ══ */}
         <section className="animate-fade-up d7" style={{ padding: '0 22px', marginBottom: 48 }}>
-          <SectionHead num="03" label={t.locations} />
+          <SectionHead num="03" label={t.section_03} />
 
           {locations.length > 0 && (
             <div dir="ltr" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center', marginBottom: 14 }}>
