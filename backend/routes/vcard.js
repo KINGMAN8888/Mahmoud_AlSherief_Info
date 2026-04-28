@@ -11,6 +11,34 @@ const router = express.Router();
 const ALLOWED_MIME = new Set(['image/jpeg', 'image/png', 'image/gif', 'image/webp']);
 const UPLOAD_DIR   = path.join(__dirname, '../uploads');
 
+/* ── GET /api/vcard/download — public vCard file ─────── */
+router.get('/download', (req, res) => {
+  const db    = getDb();
+  const v     = db.prepare('SELECT * FROM vcard WHERE id = 1').get();
+  if (!v) return res.status(404).send('Not found');
+
+  const clean = (s = '') => String(s).replace(/[\r\n;]/g, ' ');
+  const lines = [
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    `FN;CHARSET=UTF-8:${clean(v.name)}`,
+    `N;CHARSET=UTF-8:${clean(v.name)};;;;`,
+    `TITLE;CHARSET=UTF-8:${clean(v.title)}`,
+    `ORG;CHARSET=UTF-8:${clean(v.company)}`,
+    `TEL;TYPE=WORK,VOICE:${clean(v.phone)}`,
+    `EMAIL;TYPE=WORK:${clean(v.email)}`,
+    `URL:${clean(v.website)}`,
+    `ADR;TYPE=WORK;CHARSET=UTF-8:;;${clean(v.address)}`,
+    `NOTE;CHARSET=UTF-8:${clean(v.locations)}`,
+    'END:VCARD',
+  ].join('\r\n');
+
+  const filename = `${v.name.replace(/\s+/g, '_')}.vcf`;
+  res.setHeader('Content-Type', 'text/vcard; charset=utf-8');
+  res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+  res.send('\uFEFF' + lines);
+});
+
 /* ── GET /api/vcard/public ─────────────────────────────── */
 router.get('/public', (req, res) => {
   const db    = getDb();

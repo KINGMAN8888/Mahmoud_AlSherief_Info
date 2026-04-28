@@ -519,7 +519,7 @@ export default function PublicCard() {
         <div className="card-levitate card-halo" style={{ marginTop: -44, position: 'relative', zIndex: 10, paddingBottom: 4 }}>
           <ProfileHeroCard
             data={data}
-            onDownload={() => downloadVcf(data)}
+            onDownload={() => window.open('/api/vcard/download', '_blank')}
             onShare={() => shareProfile(data)}
             lang={lang}
           />
