@@ -6,7 +6,7 @@ export function useVCard() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('/api/vcard')
+    fetch('/api/vcard/public')
       .then(r => {
         if (!r.ok) throw new Error('Failed to fetch');
         return r.json();
