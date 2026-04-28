@@ -1,0 +1,79 @@
+- generic [ref=e4]:
+  - img [ref=e6]
+  - generic [ref=e9]:
+    - img "Mahmoud Alsherief" [ref=e12]
+    - heading "Mahmoud Alsherief" [level=1] [ref=e13]
+    - paragraph [ref=e14]: CEO
+    - paragraph [ref=e15]: ALTAWASUL ALALAMI & AlMedyaf Almasi
+    - generic [ref=e16]:
+      - button "حفظ جهة الاتصال" [ref=e17] [cursor=pointer]:
+        - img [ref=e18]
+        - text: حفظ جهة الاتصال
+      - button "مشاركة الملف الشخصي" [ref=e21] [cursor=pointer]:
+        - img [ref=e22]
+  - generic [ref=e29]:
+    - link "+966-53-641-3795" [ref=e30] [cursor=pointer]:
+      - /url: tel:+966536413795
+      - generic [ref=e31]:
+        - img [ref=e33]
+        - generic [ref=e35]: +966-53-641-3795
+        - img [ref=e36]
+    - link "ceo@altawasul-alalami.com" [ref=e38] [cursor=pointer]:
+      - /url: mailto:ceo@altawasul-alalami.com
+      - generic [ref=e39]:
+        - img [ref=e41]
+        - generic [ref=e44]: ceo@altawasul-alalami.com
+        - img [ref=e45]
+    - link "www.altawasul-alalami.com" [ref=e47] [cursor=pointer]:
+      - /url: https://www.altawasul-alalami.com
+      - generic [ref=e48]:
+        - img [ref=e50]
+        - generic [ref=e53]: www.altawasul-alalami.com
+        - img [ref=e54]
+  - generic [ref=e58]: وسائل التواصل
+  - generic [ref=e59]:
+    - link "اتصال هاتفي" [ref=e60] [cursor=pointer]:
+      - /url: tel:+966536413795
+      - img [ref=e62]
+      - generic [ref=e64]: اتصال هاتفي
+      - img [ref=e65]
+    - link "محادثة واتساب" [ref=e67] [cursor=pointer]:
+      - /url: https://wa.me/966536413795
+      - img [ref=e69]
+      - generic [ref=e71]: محادثة واتساب
+      - img [ref=e72]
+    - link "البريد الإلكتروني" [ref=e74] [cursor=pointer]:
+      - /url: mailto:ceo@altawasul-alalami.com
+      - img [ref=e76]
+      - generic [ref=e79]: البريد الإلكتروني
+      - img [ref=e80]
+    - link "الموقع الإلكتروني" [ref=e82] [cursor=pointer]:
+      - /url: https://www.altawasul-alalami.com
+      - img [ref=e84]
+      - generic [ref=e87]: الموقع الإلكتروني
+      - img [ref=e88]
+    - link "موقع المكتب" [ref=e90] [cursor=pointer]:
+      - /url: https://maps.google.com/?q=Makkah,Saudi+Arabia
+      - img [ref=e92]
+      - generic [ref=e95]: موقع المكتب
+      - img [ref=e96]
+  - generic [ref=e98]:
+    - generic [ref=e100]: المواقع والفروع
+    - generic [ref=e101]:
+      - generic [ref=e102]:
+        - img [ref=e103]
+        - text: Mecca
+      - generic [ref=e106]:
+        - img [ref=e107]
+        - text: Medina
+      - generic [ref=e110]:
+        - img [ref=e111]
+        - text: Indonesia
+      - generic [ref=e114]:
+        - img [ref=e115]
+        - text: Malaysia
+      - generic [ref=e118]:
+        - img [ref=e119]
+        - text: Egypt
+    - paragraph [ref=e123]: Third Ring Road Branch, 2974, Makkah Al-Mukarramah, Saudi Arabia
+  - paragraph [ref=e126]: Digital Card

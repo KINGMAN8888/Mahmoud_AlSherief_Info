@@ -1,0 +1,111 @@
+- generic [ref=e4]:
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - img [ref=e7]
+      - generic [ref=e9]: 21°23′N · 39°51′E
+    - generic [ref=e10]:
+      - button "EN" [ref=e11] [cursor=pointer]
+      - button [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - img [ref=e20]
+  - generic [ref=e25]:
+    - img [ref=e32]
+    - img "Mahmoud Alsherief" [ref=e37]
+    - generic [ref=e39]:
+      - heading "Mahmoud Alsherief" [level=2] [ref=e40]
+      - generic [ref=e41]: CEO
+      - paragraph [ref=e42]: ALTAWASUL ALALAMI & AlMedyaf Almasi
+    - generic [ref=e43]:
+      - generic [ref=e44]: رئيس تنفيذي
+      - generic [ref=e45]: موثّق
+    - generic [ref=e46]:
+      - button "حفظ جهة الاتصال" [ref=e47] [cursor=pointer]:
+        - img [ref=e48]
+        - text: حفظ جهة الاتصال
+      - button "مشاركة" [ref=e51] [cursor=pointer]:
+        - img [ref=e52]
+  - generic [ref=e58]:
+    - generic [ref=e59]:
+      - generic [ref=e60]: "01"
+      - generic [ref=e62]: معلومات الاتصال
+    - generic [ref=e64]:
+      - link "الهاتف +966-53-641-3795" [ref=e65] [cursor=pointer]:
+        - /url: tel:+966536413795
+        - generic [ref=e66]:
+          - img [ref=e68]
+          - generic [ref=e70]:
+            - generic [ref=e71]: الهاتف
+            - generic [ref=e72]: +966-53-641-3795
+          - img [ref=e73]
+      - link "البريد الإلكتروني ceo@altawasul-alalami.com" [ref=e75] [cursor=pointer]:
+        - /url: mailto:ceo@altawasul-alalami.com
+        - generic [ref=e76]:
+          - img [ref=e78]
+          - generic [ref=e81]:
+            - generic [ref=e82]: البريد الإلكتروني
+            - generic [ref=e83]: ceo@altawasul-alalami.com
+          - img [ref=e84]
+      - link "الموقع www.altawasul-alalami.com" [ref=e86] [cursor=pointer]:
+        - /url: https://www.altawasul-alalami.com
+        - generic [ref=e87]:
+          - img [ref=e89]
+          - generic [ref=e92]:
+            - generic [ref=e93]: الموقع
+            - generic [ref=e94]: www.altawasul-alalami.com
+          - img [ref=e95]
+  - generic [ref=e97]:
+    - generic [ref=e98]:
+      - generic [ref=e99]: "02"
+      - generic [ref=e101]: وسائل التواصل
+    - generic [ref=e103]:
+      - link "اتصال هاتفي" [ref=e104] [cursor=pointer]:
+        - /url: tel:+966536413795
+        - img [ref=e106]
+        - generic [ref=e108]: اتصال هاتفي
+        - img [ref=e109]
+      - link "محادثة واتساب" [ref=e111] [cursor=pointer]:
+        - /url: https://wa.me/966536413795
+        - img [ref=e113]
+        - generic [ref=e115]: محادثة واتساب
+        - img [ref=e116]
+      - link "البريد الإلكتروني" [ref=e118] [cursor=pointer]:
+        - /url: mailto:ceo@altawasul-alalami.com
+        - img [ref=e120]
+        - generic [ref=e123]: البريد الإلكتروني
+        - img [ref=e124]
+      - link "الموقع الإلكتروني" [ref=e126] [cursor=pointer]:
+        - /url: https://www.altawasul-alalami.com
+        - img [ref=e128]
+        - generic [ref=e131]: الموقع الإلكتروني
+        - img [ref=e132]
+      - link "موقع المكتب" [ref=e134] [cursor=pointer]:
+        - /url: https://maps.google.com/?q=Makkah,Saudi+Arabia
+        - img [ref=e136]
+        - generic [ref=e139]: موقع المكتب
+        - img [ref=e140]
+  - generic [ref=e142]:
+    - generic [ref=e143]:
+      - generic [ref=e144]: "03"
+      - generic [ref=e146]: الفروع والمواقع
+    - generic [ref=e148]:
+      - generic [ref=e149]:
+        - img [ref=e150]
+        - text: Mecca
+      - generic [ref=e153]:
+        - img [ref=e154]
+        - text: Medina
+      - generic [ref=e157]:
+        - img [ref=e158]
+        - text: Indonesia
+      - generic [ref=e161]:
+        - img [ref=e162]
+        - text: Malaysia
+      - generic [ref=e165]:
+        - img [ref=e166]
+        - text: Egypt
+    - generic [ref=e169]:
+      - img [ref=e170]
+      - paragraph [ref=e173]: Third Ring Road Branch, 2974, Makkah Al-Mukarramah, Saudi Arabia
+  - contentinfo [ref=e174]:
+    - paragraph [ref=e176]: 21°23′N · 39°51′E · KSA
+    - paragraph [ref=e177]: · البطاقة الرقمية ·
