@@ -329,75 +329,27 @@ Open in browser: **https://ceo.altawasul-alalami.com**
 
 ---
 
-## Updating the Application
+## Updating the Application (التحديث)
 
-### Frontend only (no restart required)
+قمنا بإضافة سكريبت تلقائي لتسهيل عملية التحديث بضغطة زر واحدة دون الحاجة لتشغيل الأوامر يدوياً.
 
-```bash
-# On your local machine:
-cd "f:\Dashboard my father\frontend"
-npm run build
+### طريقة التحديث الجديدة:
 
-rsync -avz \
-  "f:/Dashboard my father/frontend/dist/" \
-  root@YOUR_VPS_IP:/var/www/vcard/frontend/dist/
+1. افتح ملف `update.ps1` الموجود في مسار المشروع.
+2. قم بتغيير قيمة `$VPS_IP` إلى عنوان الـ IP الخاص بالخادم.
+3. افتح موجه الأوامر (PowerShell) وقم بتشغيل السكريبت:
 
-rsync -avz \
-  "f:/Dashboard my father/frontend/public/altawasul.png" \
-  root@YOUR_VPS_IP:/var/www/vcard/frontend/dist/
+```powershell
+cd "f:\Dashboard my father"
+.\update.ps1
 ```
 
-### Backend only
-
-```bash
-# On your local machine:
-rsync -avz \
-  --exclude='node_modules' --exclude='.env' \
-  --exclude='*.db' --exclude='*.db-shm' --exclude='*.db-wal' \
-  --exclude='uploads/*' \
-  "f:/Dashboard my father/backend/" \
-  root@YOUR_VPS_IP:/var/www/vcard/backend/
-
-ssh root@YOUR_VPS_IP \
-  "cd /var/www/vcard/backend && npm install --omit=dev && pm2 restart vcard"
-```
-
-### Full update (frontend + backend)
-
-```bash
-# On your local machine:
-cd "f:\Dashboard my father\frontend" && npm run build
-
-rsync -avz \
-  --exclude='node_modules' --exclude='.env' \
-  --exclude='*.db' --exclude='*.db-shm' --exclude='*.db-wal' \
-  --exclude='uploads/*' \
-  "f:/Dashboard my father/backend/" \
-  root@YOUR_VPS_IP:/var/www/vcard/backend/
-
-rsync -avz \
-  "f:/Dashboard my father/frontend/dist/" \
-  root@YOUR_VPS_IP:/var/www/vcard/frontend/dist/
-
-rsync -avz \
-  "f:/Dashboard my father/frontend/public/altawasul.png" \
-  root@YOUR_VPS_IP:/var/www/vcard/frontend/dist/
-
-ssh root@YOUR_VPS_IP \
-  "cd /var/www/vcard/backend && npm install --omit=dev && pm2 restart vcard"
-```
-
-### Update from GitHub (on the VPS)
-
-```bash
-# On the VPS:
-cd /var/www/vcard
-git clone https://github.com/KINGMAN8888/Mahmoud_AlSherief_Info.git .
-# or if already cloned:
-git pull origin main
-
-cd backend && npm install --omit=dev && pm2 restart vcard
-```
+سيقوم هذا السكريبت بـ:
+- رفع أحدث التعديلات إلى GitHub.
+- الاتصال بالخادم الخاص بك عبر SSH.
+- جلب التحديثات من GitHub إلى الخادم.
+- بناء الواجهة الأمامية (Frontend) مباشرة في الخادم.
+- تحديث الحزم وإعادة تشغيل الواجهة الخلفية (Backend) لتطبيق التغييرات.
 
 ---
 
