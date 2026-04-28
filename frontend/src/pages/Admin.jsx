@@ -8,6 +8,10 @@ function getToken() { return localStorage.getItem('vcard_token'); }
 function setToken(t) { localStorage.setItem('vcard_token', t); }
 function clearToken() { localStorage.removeItem('vcard_token'); }
 
+class AuthError extends Error {
+  constructor() { super('انتهت صلاحية الجلسة. يرجى تسجيل الدخول مجدداً.'); this.isAuthError = true; }
+}
+
 async function apiFetch(path, options = {}) {
   const token = getToken();
   const res = await fetch(path, {
@@ -18,6 +22,7 @@ async function apiFetch(path, options = {}) {
       ...options.headers,
     },
   });
+  if (res.status === 401) throw new AuthError();
   if (!res.ok) throw new Error((await res.json()).error || 'Request failed');
   return res.json();
 }
@@ -72,6 +77,7 @@ function LoginForm({ onSuccess }) {
               style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', color: 'var(--text-primary)', fontFamily: 'Inter' }}
               onFocus={e => e.target.style.borderColor = 'var(--gold)'}
               onBlur={e => e.target.style.borderColor = 'var(--border)'}
+              autoComplete="username"
               required
             />
           </div>
@@ -86,9 +92,11 @@ function LoginForm({ onSuccess }) {
                 style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', color: 'var(--text-primary)', fontFamily: 'Inter' }}
                 onFocus={e => e.target.style.borderColor = 'var(--gold)'}
                 onBlur={e => e.target.style.borderColor = 'var(--border)'}
+                autoComplete="current-password"
                 required
               />
               <button type="button" onClick={() => setShowPass(!showPass)}
+                      aria-label={showPass ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'}
                       className="absolute right-3 top-1/2 -translate-y-1/2"
                       style={{ color: 'var(--text-muted)' }}>
                 {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -152,8 +160,11 @@ function Dashboard({ onLogout }) {
   const [uploadingField, setUploadingField] = useState(null);
 
   useEffect(() => {
-    apiFetch('/api/vcard').then(setData).catch(console.error);
-  }, []);
+    apiFetch('/api/vcard').then(setData).catch(err => {
+      if (err.isAuthError) { clearToken(); onLogout(); }
+      else console.error(err);
+    });
+  }, [onLogout]);
 
   if (!data) return <LoadingScreen />;
 
@@ -179,7 +190,8 @@ function Dashboard({ onLogout }) {
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
-      alert(err.message);
+      if (err.isAuthError) { clearToken(); onLogout(); }
+      else alert(err.message);
     } finally {
       setSaving(false);
     }
@@ -193,7 +205,8 @@ function Dashboard({ onLogout }) {
       const { url } = await apiFetch('/api/vcard/upload', { method: 'POST', body: form });
       set(field, url);
     } catch (err) {
-      alert(err.message);
+      if (err.isAuthError) { clearToken(); onLogout(); }
+      else alert(err.message);
     } finally {
       setUploadingField(null);
     }

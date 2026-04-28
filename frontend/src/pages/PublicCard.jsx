@@ -3,19 +3,22 @@ import { useVCard } from '../hooks/useVCard.js';
 import LinkCard from '../components/LinkCard.jsx';
 import LoadingScreen from '../components/LoadingScreen.jsx';
 
+// Sanitize field values for vCard format — strip chars that break vCard lines
+const clean = (s = '') => String(s).replace(/[\r\n;]/g, ' ');
+
 function downloadVcf(data) {
   const vcard = [
     'BEGIN:VCARD',
     'VERSION:3.0',
-    `FN;CHARSET=UTF-8:${data.name}`,
-    `N;CHARSET=UTF-8:${data.name};;;;`,
-    `TITLE;CHARSET=UTF-8:${data.title}`,
-    `ORG;CHARSET=UTF-8:${data.company}`,
-    `TEL;TYPE=WORK,VOICE:${data.phone}`,
-    `EMAIL;TYPE=WORK:${data.email}`,
-    `URL:${data.website}`,
-    `ADR;TYPE=WORK;CHARSET=UTF-8:;;${data.address}`,
-    `NOTE;CHARSET=UTF-8:${data.locations}`,
+    `FN;CHARSET=UTF-8:${clean(data.name)}`,
+    `N;CHARSET=UTF-8:${clean(data.name)};;;;`,
+    `TITLE;CHARSET=UTF-8:${clean(data.title)}`,
+    `ORG;CHARSET=UTF-8:${clean(data.company)}`,
+    `TEL;TYPE=WORK,VOICE:${clean(data.phone)}`,
+    `EMAIL;TYPE=WORK:${clean(data.email)}`,
+    `URL:${clean(data.website)}`,
+    `ADR;TYPE=WORK;CHARSET=UTF-8:;;${clean(data.address)}`,
+    `NOTE;CHARSET=UTF-8:${clean(data.locations)}`,
     'END:VCARD',
   ].join('\n');
   const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
@@ -23,7 +26,9 @@ function downloadVcf(data) {
   const a = document.createElement('a');
   a.href = url;
   a.download = `${data.name.replace(/\s+/g, '_')}.vcf`;
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
 
@@ -38,10 +43,24 @@ async function shareProfile(data) {
 }
 
 export default function PublicCard() {
-  const { data, loading } = useVCard();
+  const { data, loading, error } = useVCard();
 
   if (loading) return <LoadingScreen />;
-  if (!data) return null;
+
+  if (error || !data) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center gap-3"
+           style={{ background: 'var(--bg-base)' }}>
+        <p style={{ color: 'var(--text-muted)', fontFamily: 'Tajawal' }}>تعذّر تحميل البيانات</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="px-4 py-2 rounded-xl text-sm font-medium"
+          style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', color: 'var(--gold)' }}>
+          إعادة المحاولة
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg-base)' }}
@@ -55,7 +74,7 @@ export default function PublicCard() {
 
         {/* Cover image */}
         <div className="relative h-52 overflow-hidden">
-          <img src={data.cover_image} alt="cover"
+          <img src={data.cover_image} alt={`صورة غلاف ${data.name}`}
                className="w-full h-full object-cover"
                style={{ opacity: 0.5, mixBlendMode: 'luminosity' }} />
           <div className="absolute inset-0"
@@ -114,6 +133,7 @@ export default function PublicCard() {
             </button>
             <button
               onClick={() => shareProfile(data)}
+              aria-label="مشاركة الملف الشخصي"
               className="flex items-center justify-center p-3 rounded-2xl transition-all duration-200 active:scale-95"
               style={{
                 background: 'var(--bg-surface)',
