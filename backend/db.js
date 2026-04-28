@@ -50,49 +50,49 @@ function initSchema(db) {
     );
   `);
 
-  // Seed vcard if empty
-  const hasVcard = db.prepare('SELECT id FROM vcard WHERE id = 1').get();
-  if (!hasVcard) {
-    db.prepare(`
-      INSERT INTO vcard (id, name, title, company, phone, display_phone, email, website, address, locations, profile_image, cover_image)
-      VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(
-      'Mahmoud Alsherief',
-      'CEO',
-      'ALTAWASUL ALALAMI & AlMedyaf Almasi',
-      '+966536413795',
-      '+966-53-641-3795',
-      'ceo@altawasul-alalami.com',
-      'https://www.altawasul-alalami.com',
-      'Third Ring Road Branch, 2974, Makkah Al-Mukarramah, Al-Khalidiyah District, Saudi Arabia, 24243',
-      'Mecca - Medina - Indonesia - Malaysia - Egypt',
-      'https://placehold.co/400x400/1a1a1a/d4af37?text=MA',
-      'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop'
-    );
-  }
+  const seedAll = db.transaction(() => {
+    const hasVcard = db.prepare('SELECT id FROM vcard WHERE id = 1').get();
+    if (!hasVcard) {
+      db.prepare(`
+        INSERT INTO vcard (id, name, title, company, phone, display_phone, email, website, address, locations, profile_image, cover_image)
+        VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `).run(
+        'Mahmoud Alsherief',
+        'CEO',
+        'ALTAWASUL ALALAMI & AlMedyaf Almasi',
+        '+966536413795',
+        '+966-53-641-3795',
+        'ceo@altawasul-alalami.com',
+        'https://www.altawasul-alalami.com',
+        'Third Ring Road Branch, 2974, Makkah Al-Mukarramah, Al-Khalidiyah District, Saudi Arabia, 24243',
+        'Mecca - Medina - Indonesia - Malaysia - Egypt',
+        'https://placehold.co/400x400/1a1a1a/d4af37?text=MA',
+        'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop'
+      );
+    }
 
-  // Seed links if empty
-  const hasLinks = db.prepare('SELECT id FROM links LIMIT 1').get();
-  if (!hasLinks) {
-    const insertLink = db.prepare('INSERT INTO links (sort, title, type, url, icon) VALUES (?, ?, ?, ?, ?)');
-    const seedLinks = [
-      [1, 'اتصال هاتفي', 'phone', 'tel:+966536413795', 'Phone'],
-      [2, 'محادثة واتساب', 'whatsapp', 'https://wa.me/966536413795', 'MessageCircle'],
-      [3, 'البريد الإلكتروني', 'email', 'mailto:ceo@altawasul-alalami.com', 'Mail'],
-      [4, 'الموقع الإلكتروني', 'website', 'https://www.altawasul-alalami.com', 'Globe'],
-      [5, 'موقع المكتب', 'map', 'https://maps.google.com/?q=2974,Makkah', 'MapPin'],
-    ];
-    seedLinks.forEach(l => insertLink.run(...l));
-  }
+    const hasLinks = db.prepare('SELECT id FROM links LIMIT 1').get();
+    if (!hasLinks) {
+      const insertLink = db.prepare('INSERT INTO links (sort, title, type, url, icon) VALUES (?, ?, ?, ?, ?)');
+      const seedLinks = [
+        [1, 'اتصال هاتفي', 'phone', 'tel:+966536413795', 'Phone'],
+        [2, 'محادثة واتساب', 'whatsapp', 'https://wa.me/966536413795', 'MessageCircle'],
+        [3, 'البريد الإلكتروني', 'email', 'mailto:ceo@altawasul-alalami.com', 'Mail'],
+        [4, 'الموقع الإلكتروني', 'website', 'https://www.altawasul-alalami.com', 'Globe'],
+        [5, 'موقع المكتب', 'map', 'https://maps.google.com/?q=2974,Makkah', 'MapPin'],
+      ];
+      seedLinks.forEach(l => insertLink.run(...l));
+    }
 
-  // Seed admin if empty
-  const hasAdmin = db.prepare('SELECT id FROM admin WHERE id = 1').get();
-  if (!hasAdmin) {
-    const username = process.env.ADMIN_USERNAME || 'admin';
-    const password = process.env.ADMIN_PASSWORD || 'changeme123';
-    const hash = bcrypt.hashSync(password, 10);
-    db.prepare('INSERT INTO admin (id, username, password_hash) VALUES (1, ?, ?)').run(username, hash);
-  }
+    const hasAdmin = db.prepare('SELECT id FROM admin WHERE id = 1').get();
+    if (!hasAdmin) {
+      const username = process.env.ADMIN_USERNAME || 'admin';
+      const password = process.env.ADMIN_PASSWORD || 'changeme123';
+      const hash = bcrypt.hashSync(password, 10);
+      db.prepare('INSERT INTO admin (id, username, password_hash) VALUES (1, ?, ?)').run(username, hash);
+    }
+  });
+  seedAll();
 }
 
 module.exports = { getDb, closeDb };
