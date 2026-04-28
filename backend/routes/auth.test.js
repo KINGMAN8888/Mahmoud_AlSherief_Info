@@ -17,6 +17,8 @@ test('POST /api/auth/login with correct credentials returns token', async () => 
   const res = await request(app).post('/api/auth/login').send({ username: 'admin', password: 'testpass' });
   expect(res.status).toBe(200);
   expect(res.body).toHaveProperty('token');
+  const decoded = require('jsonwebtoken').verify(res.body.token, 'test-secret');
+  expect(decoded).toHaveProperty('id');
 });
 
 test('POST /api/auth/login with wrong password returns 401', async () => {
